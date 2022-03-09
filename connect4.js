@@ -14,13 +14,10 @@ let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
-
+ *    board = array of rows, each row is array of cells  (board[y][x]) */
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
-  let row = Array.from({ length: WIDTH }, elem => null);
   for (let i = 0; i <= HEIGHT; i++) {
+    let row = Array.from({ length: WIDTH });
     board.push(row);
   }
 }
@@ -28,39 +25,29 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  let htmlBoard = document.getElementById("board");
 
-  // TODO: Creates table header row with event listener.
+  const htmlBoard = document.getElementById("board");
   const top = document.createElement("tr");
+
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
-  // TODO: Creates header/input row above game board.
   for (let x = 0; x < WIDTH; x++) {
-    let headCell = document.createElement("td");
+    const headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
-  htmlBoard.append(top);
+    htmlBoard.append(top);
 
-  // dynamically creates the main part of html board
-  // uses HEIGHT to create table rows
-  // uses WIDTH to create table cells for each row
+
   for (let y = 0; y < HEIGHT; y++) {
-    // TODO: Create a table row element and assign to a "row" variable
-    let row = document.createElement("tr")
-    for (let x = 0; x < WIDTH; x++) {
-      // TODO: Create a table cell element and assign to a "cell" variable
-      let cell = document.createElement("td")
-      cell.setAttribute("id", `${y}-${x}`);
-      // TODO: add an id, y-x, to the above table cell element
-      // you'll use this later, so make sure you use y-x
+    const row = document.createElement("tr");
 
-      // TODO: append the table cell to the table row
+    for (let x = 0; x < WIDTH; x++) {
+      const cell = document.createElement("td");
+      cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
     }
-    // TODO: append the row to the html board
     htmlBoard.append(row);
   }
 }
