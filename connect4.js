@@ -59,7 +59,7 @@ function findSpotForCol(x) {
   for (let y = HEIGHT; y > 0; y--) {
     if (!board[y][x]) return y;
   }
-  return null
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -89,7 +89,7 @@ function handleClick(evt) {
   if (y === null) return;
 
   placeInTable(y, x);
-  board[y][x] = currPlayer
+  board[y][x] = currPlayer;
 
   // check for win
   if (checkForWin()) {
