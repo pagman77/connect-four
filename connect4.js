@@ -40,7 +40,7 @@ function makeHtmlBoard() {
     htmlBoard.append(top);
 
 
-  for (let y = 0; y < HEIGHT; y++) {
+  for (let y = 1; y <= HEIGHT; y++) {
     const row = document.createElement("tr");
 
     for (let x = 0; x < WIDTH; x++) {
@@ -55,18 +55,16 @@ function makeHtmlBoard() {
 /** findSpotForCol: given column x, return bottom empty y (null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 5
 
-  for (let y = WIDTH; y >= 0; y--) {
-    if (!board[x][y]) return y;
+  for (let y = HEIGHT; y > 0; y--) {
+    if (!board[y][x]) return y;
   }
-  return
+  return null
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
   const piece = document.createElement("div");
   piece.setAttribute("class", "piece");
 
@@ -83,18 +81,13 @@ function endGame(msg) {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  // get x from ID of clicked cell
-  var x = +evt.target.id;
+  const x = +evt.target.id;
+  const y = findSpotForCol(x);
 
-  // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
-  if (y === null) {
-    return;
-  }
+  if (y === null) return;
 
-  // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   placeInTable(y, x);
+  board[y][x] = currPlayer
 
   // check for win
   if (checkForWin()) {
